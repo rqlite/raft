@@ -788,6 +788,7 @@ func (r *Raft) leaderLoop() {
 			oldCommitIndex := r.getCommitIndex()
 			commitIndex := r.leaderState.commitment.getCommitIndex()
 			r.setCommitIndex(commitIndex)
+			// Make a comment change only to test the CI
 
 			// New configuration has been committed, set it as the committed
 			// value.
