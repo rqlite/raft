@@ -2028,7 +2028,6 @@ func TestRaft_VerifyAssertedLeadership(t *testing.T) {
 }
 
 func TestRaft_VerifyAssertedLeadership_Fail(t *testing.T) {
-	t.Skip()
 	// Make the cluster
 	c := MakeCluster(3, t, nil)
 	defer c.Close()
