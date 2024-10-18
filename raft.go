@@ -688,7 +688,7 @@ func (r *Raft) leaderLoop() {
 
 	// Track whether leadership has been asserted. This becomes true once
 	// the leader has committed at least one log in this term.
-	//leadershipAsserted := false
+	leadershipAsserted := false
 
 	for r.getState() == Leader {
 		r.mainThreadSaturation.sleeping()
@@ -802,7 +802,7 @@ func (r *Raft) leaderLoop() {
 			oldCommitIndex := r.getCommitIndex()
 			commitIndex := r.leaderState.commitment.getCommitIndex()
 			r.setCommitIndex(commitIndex)
-			//leadershipAsserted = true
+			leadershipAsserted = true
 
 			// New configuration has been committed, set it as the committed
 			// value.
@@ -884,11 +884,11 @@ func (r *Raft) leaderLoop() {
 				v.respond(nil)
 			}
 
-		// case v := <-r.assertedCh:
-		// 	r.mainThreadSaturation.working()
-		// 	v.asserted = leadershipAsserted
-		// 	v.term = r.getCurrentTerm()
-		// 	v.respond(nil)
+		case v := <-r.assertedCh:
+			r.mainThreadSaturation.working()
+			v.asserted = leadershipAsserted
+			v.term = r.getCurrentTerm()
+			v.respond(nil)
 
 		case future := <-r.userRestoreCh:
 			r.mainThreadSaturation.working()
