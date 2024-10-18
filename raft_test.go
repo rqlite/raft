@@ -1971,10 +1971,9 @@ func TestRaft_VerifyLeader_PartialConnect(t *testing.T) {
 	}
 }
 
-func TestRaft_VerifyAssertedLeadership(t *testing.T) {
-	t.Skip()
+func TestRaft_VerifyAssertedLeadership_Single(t *testing.T) {
 	// Make the cluster
-	c := MakeCluster(3, t, nil)
+	c := MakeCluster(1, t, nil)
 	defer c.Close()
 
 	// Get the leader
@@ -2000,10 +1999,10 @@ func TestRaft_VerifyAssertedLeadership(t *testing.T) {
 	}
 }
 
-func TestRaft_VerifyAssertedLeadership_Single(t *testing.T) {
+func TestRaft_VerifyAssertedLeadership(t *testing.T) {
 	t.Skip()
 	// Make the cluster
-	c := MakeCluster(1, t, nil)
+	c := MakeCluster(3, t, nil)
 	defer c.Close()
 
 	// Get the leader
