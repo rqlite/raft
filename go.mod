@@ -1,4 +1,4 @@
-module github.com/hashicorp/raft
+module github.com/rqlite/raft
 
 go 1.20
 
